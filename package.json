@@ -1,0 +1,30 @@
+{
+  "name": "jjj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "setup-production": "npm run install-client && npm run build-client && npm install",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "server": "nodemon server  --ignore client",
+    "client": "npm start --prefix client",
+    "start": "concurrently --kill-others-on-fail  \" npm run server\"  \" npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "create-react": "^0.0.0",
+    "create-react-app": "^5.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2",
+    "nodemailer": "^6.9.13",
+    "nodemon": "^3.1.0"
+  }
+}
