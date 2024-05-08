@@ -26,7 +26,10 @@ const AppProvider=({children})=>{
       if(x){clearTimeout(x)}
       setalert(true)
       
-     x= setTimeout(()=>setalert(false),2000)
+     x= setTimeout(()=>
+      {setalert(false)
+        setalertmsg('')
+      },2000)
     }
     const closealert=()=>{
       setalert(false)
@@ -80,6 +83,29 @@ const AppProvider=({children})=>{
     const[selectedproduct,setselectedproduct]=useState({})
  
 
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+
+
+    const filtercat=(arg)=>{
+      if(arg===''||!arg){
+        setsearchedproducts(products)
+
+      }
+     
+     
+      let arr=products
+      console.log('arg '+arg);
+      arr=arr.filter((item)=>item.category===arg)
+      console.log(arr);
+
+     if(arr.length===0){return}
+      setsearchedproducts(arr)
+      console.log('cat');
+     
+
+    }
+
 
     
     const [loading, setLoading] = useState(true);
@@ -103,6 +129,8 @@ const AppProvider=({children})=>{
 
 
       const [searchedproducts,setsearchedproducts]=useState([])
+      const [categories,setcategories]=useState([])
+
 
 
       const search=(arg)=>{
@@ -133,7 +161,15 @@ const AppProvider=({children})=>{
           console.log(data);
           setProducts(data.prod);
           setsearchedproducts(data.prod)
+          let cat=data.prod.map((item)=>item.category)
+          cat = [...new Set(cat)];
+          
+          setcategories(cat)
+
           setLoading(false); // Set loading to false once data is fetched
+
+
+
         } catch (error) {
           console.error('Error fetching products:', error);
           setLoading(false); // Set loading to false if there's an error
@@ -147,7 +183,7 @@ const AppProvider=({children})=>{
 
     return <AppContext.Provider value={{products,loading,setsp,selectedproduct,addtocart,cart,
     alert,togglealert,alertmsg,setalertmsg,handleDecreaseQuantity,handleIncreaseQuantity,handleRemoveItem,closealert,user,setuser,
-    search,searchedproducts,colo,setcolo}}>{children}</AppContext.Provider>
+    search,searchedproducts,colo,setcolo,categories,selectedCategory, setSelectedCategory,filtercat}}>{children}</AppContext.Provider>
 
 }
 

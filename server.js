@@ -4,10 +4,18 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import {productrouter,userrouter} from './routes/index.js'
 import dotenv from 'dotenv'
-
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
 dotenv.config()
 
-const app = express();
+
+const port=process.env.ort||6000
+const app =express()
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(path.resolve(__dirname, './client/build')));
+app.use(express.json())
 
 // Middleware
 app.use(bodyParser.json());

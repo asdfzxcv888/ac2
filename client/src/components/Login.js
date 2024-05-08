@@ -73,6 +73,8 @@ const Login = () => {
     }
     if(data.newuser){
       setalertmsg('Login Successful redirecting....')
+      setcolo(true)
+
       togglealert()
       setuser({...data.newuser})
       const userJSON = JSON.stringify(data.newuser);
@@ -94,7 +96,9 @@ const Login = () => {
       
     }
     if(data.newuser){
-      setalertmsg('Login Successful redirecting....')
+      setalertmsg('Register Successful redirecting....')
+      setcolo(true)
+
       togglealert()
       setuser({...data.newuser})
       setTimeout(()=>navigate('/products'),1000)

@@ -40,15 +40,17 @@ const Button = styled.button`
 `;
 
 const Home = () => {
+  const navigate=useNavigate()
   return (
     <Container>
       <Content>
+        <img src='https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg?auto=compress&cs=tinysrgb&w=600' style={{borderRadius:'3%',border:'0.1rem solid black'}}></img>
         <Title>Welcome to Amazon Clone</Title>
         <Description>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere
           gravida turpis, vitae posuere neque venenatis at.
         </Description>
-        <Button>Start Shopping</Button>
+        <Button onClick={()=>navigate('/Login')}>Start Shopping</Button>
       </Content>
     </Container>
   );

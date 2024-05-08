@@ -215,6 +215,7 @@ const Input = styled.input`
   width: 300px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-right:1vw;
 `;
 
 
@@ -222,17 +223,29 @@ const SearchResult = styled.div`
   margin-top: 20px;
 `;
 
+const Select = styled.select`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right:1vw;
+`;
+
 
 
 
 const Products = () => {
-  const{searchedproducts:products,loading,setsp,togglealert,setalertmsg,search,setcolo}=useGlobalContext()
+  const{searchedproducts:products,loading,setsp,togglealert,setalertmsg,search,setcolo,categories,filtercat}=useGlobalContext()
+  console.log(loading);
+
   const navigate=useNavigate()
   const {addtocart}=useGlobalContext()
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleSearch = () => {
     console.log('Searching for:', searchTerm);}
+
+    useEffect(()=>{filtercat(selectedCategory)},[selectedCategory])
   
 
 if(loading){
@@ -246,6 +259,17 @@ if(loading){
           onChange={(e) => search(e.target.value)}
           placeholder="Search..."
         />
+         <Select
+        value={selectedCategory}
+        onChange={(e) => {setSelectedCategory(e.target.value)
+          
+        }}
+      >
+        <option value="">All Categories</option>
+        {categories.map(category => (
+          <option key={category} value={category}>{category}</option>
+        ))}
+      </Select>
         <Button onClick={handleSearch}>Search</Button>
       </SearchContainer>
       <SearchResult>

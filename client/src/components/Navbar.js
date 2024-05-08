@@ -45,6 +45,7 @@ const Navbar = () => {
           navigate('/Login')
           
           setuser(null)
+          localStorage.removeItem('user')
           setcolo(false)
         }}>Logout</Button></NavLink>}
       </NavLinks>
